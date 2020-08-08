@@ -21,36 +21,50 @@ class App extends Component {
     this.setState({ account: accounts[0] })
     const schainDapp = new web3.eth.Contract(SCHAIN_ABI, SCHAIN_ADD)
     this.setState({ schainDapp })
-    const prodIdCount = await schainDapp.methods.productIdCounter().call
-    this.setState({ prodIdCount })
-    console.log(prodIdCount);
-    for (let i = 1; i <= prodIdCount; i++) {
+    const productIdCount = await schainDapp.methods.productIdCounter().call()
+    this.setState({ productIdCount })
+    for (let i = 1; i <= productIdCount; i++) {
       const product = await schainDapp.methods.products(i).call()
       this.setState({
         products: [...this.state.products, product]
       })
     }
+    console.log('products', this.state.products)
     this.setState({ loading: false})
-    console.log(this.state.products);
   }
   
-  constructor(props) {
+  constructor(props) {  
     super(props)
     this.state = { 
       account: '',
-      productIdCount: 0,
-      productName: "",
-      productInfo: "",
-      productValue: 0,
-      productGpgga: "",
-      productDest: "",
-      products: [],
-      loading: true
+      prodIdCount: 0,
+      loading: true,
+      products: []    
     }
-    this.createProduct = this.createProduct.bind(this)
+    // this.prodChangeHandler = this.prodChangeHandler.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+
+    // this.createProduct = this.createProduct.bind(this)
   }
 
-  createProduct(content) {
+  /*prodChangeHandler(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    console.log(name, value);
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+
+  
+  createProduct() {
     this.setState({ loading: true })
     this.state.schainDapp.methods.addProduct(
       this.state.productName, 
@@ -63,6 +77,7 @@ class App extends Component {
       this.setState({ loading: false })
     })
   }
+  */
   
   render() {
     return (
@@ -87,11 +102,51 @@ class App extends Component {
               {/*<div className="row">Current products: { this.state.productIdCount }</div>*/}
             </main>           
           </div>
-          
-          {/* Main actions */}
+          <div className="row">
+        <div className="col-lg-12 d-flex justify-content-center mt-3">
+          <div id="content">
+            <form
+              onSubmit={(event) => {
+                event.preventDefault()
+                this.props.createProduct()
+              }}>
+              <label>
+                Enter Product Info: 
+                <input 
+                  name="productInfo"  
+                  type="text" 
+                  className="form-control"  
+                  placeholder="Add info..." 
+                  required 
+                  onChange={this.prodChangeHandler}
+                />
+              </label>
+              <input type="submit" hidden={true} />
+            </form>
+            <ul className="list-unstyled" id="productList">
+              { this.state.products.map((product, key) => {
+                return(
+                  <div className="productTemplate" key={key}>
+                    <label>
+                      <span className="content">{product.productId}</span>
+                      <span className="content">{product.productInfo}</span> 
+                      <span className="content">{product.productProducer}</span>
+                    </label>
+                  </div>
+                )
+              })}
+            </ul>
+            <ul></ul>
+          </div>
+        </div>
+      </div>
+
+          {/* Main actions 
           { this.state.loading ? <div id="loader"> <p>Loading...</p> </div>
-            : <ProductList products={this.state.products} createProduct={this.createProduct} />
-          }
+            : <ProductList products={this.state.products}  />
+          }  
+          */}
+
         </div>
       </div>
     );

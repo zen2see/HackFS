@@ -10,5 +10,8 @@
     "test": "test"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "slate-react-system": "0.0.7"
+  }
 }

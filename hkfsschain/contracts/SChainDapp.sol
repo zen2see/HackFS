@@ -19,27 +19,14 @@ contract SChainDapp is Ownable {
 
     mapping (address => string) public attestations;
 
-    /// @notice A Producg:
+    /// @notice A Product:
     /// @param Product Id: @productId
-    /// @param Product Value: @productValue
-    /// @param Product Name: @productName
-    /// @param Product GPA: @productGpgga
-    /// @param Product Destination: @productDest
+    /// @param Product Info: @productInfo
     /// @param Product Producer: @productProducer
-    /// @param Product Customer: @productCustomer
-    /// @param Product Seller: @productSeller
-    /// @param Product Distributor: @productDistributor
     struct Product {
         uint productId;
-        string productName;
         string productInfo;
-        uint256 productValue;
-        string productGpgga;
-        string productDest;
         address payable productProducer;
-        address productCustomer;
-        address productSeller;
-        address productDistributor;
     }
  
     mapping (uint => Product) public products;
@@ -51,18 +38,12 @@ contract SChainDapp is Ownable {
 
     /// @notice LogAddProduct should provide info about the product
     /// @param prodId the product id
-    /// @param prodName the product name
-    /// @param prodInfo the produt infi
-    /// @param prodValue the product value
-    /// @param prodGpgga the product coordinates
-    /// @param prodDest the product destination
+    /// @param prodInfo the product info
+    /// @param prodProducer the product producer
     event LogAddProduct(
         uint prodId,
-        string prodName,
         string prodInfo,
-        uint256 prodValue,
-        string prodGpgga,
-        string prodDest
+        address prodProducer
     );
 
     /// @notice Create a modifier that throws an error if the address !isAdmin
@@ -83,7 +64,7 @@ contract SChainDapp is Ownable {
     {
         scAdmin = owner();      
         addAdmin(scAdmin);
-        addProduct("pname", "pinfo", 1, "0", "unknown");
+        addProduct("Example product");
     }
 
     /// @notice Payable fallback
@@ -108,46 +89,28 @@ contract SChainDapp is Ownable {
 
     /// @notice This function adds a Product
     /// @dev The productId is derived from the counter
-    /// @param prodName The product name
     /// @param prodInfo Any product info
-    /// @param prodValue The product value
-    /// @param prodGpgga The product gpa
-    /// @param prodDest the product dest
     function addProduct(
-        string memory prodName, 
-        string memory prodInfo,
-        uint256 prodValue,
-        string memory prodGpgga,
-        string memory prodDest
+        string memory prodInfo
     )
         public
         onlyAdmin(_msgSender())
- 
     {
         productIdCounter++;
 
         /// @notice update via productId
         products[productIdCounter] = Product(
             productIdCounter,
-            prodName,
             prodInfo,
-            prodValue = 0,
-            prodGpgga = "",
-            prodDest = "",
-            _msgSender(),
-            address(0),
-            address(0),
-            address(0)
+            _msgSender()
         );
 
-        emit LogAddProduct(productIdCounter, prodName, prodInfo, prodValue, prodGpgga, prodDest); 
+        emit LogAddProduct(productIdCounter, prodInfo, _msgSender()); 
     }
 
     /// @notice Returns Product
     /// @return product's Id
-    /// @return product's name
     /// @return product's info
-    /// @return product's value
     /// @return product's producer
     function getProductById(uint _prodId)
         public
@@ -155,8 +118,6 @@ contract SChainDapp is Ownable {
         returns (
             uint,
             string memory,
-            string memory,
-            uint256,
             address 
         )
     {
@@ -167,9 +128,7 @@ contract SChainDapp is Ownable {
 
           return (
               products[_prodId].productId,
-              products[_prodId].productName,
               products[_prodId].productInfo,
-              products[_prodId].productValue,
               products[_prodId].productProducer
         );
     }

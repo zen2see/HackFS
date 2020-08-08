@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 class ProductList extends Component {
-  
+  /*
   render() {
     return (
       <div className="row">
@@ -24,7 +24,7 @@ class ProductList extends Component {
                   type="text" 
                   placeholder="Add name..." 
                   required 
-                  /*onChange={this.prodChangeHandler}*/
+                  /*onChange={this.prodChangeHandler}
                 />
               </label>
               <br />
@@ -39,7 +39,7 @@ class ProductList extends Component {
                   type="text" 
                   placeholder="Add info..." 
                   required 
-                  /*onChange={this.prodChangeHandler}*/
+                  /*onChange={this.prodChangeHandler}
                 />
               </label>
               <br />
@@ -54,7 +54,7 @@ class ProductList extends Component {
                   type="number" 
                   placeholder="Add value..." 
                   required
-                  /*onChange={this.prodChangeHandler}*/
+                  /*onChange={this.prodChangeHandler}
                 />
               </label>
               <br />
@@ -69,7 +69,7 @@ class ProductList extends Component {
                   type="text" 
                   placeholder="Add gpgga..." 
                   required
-                  /*onChange={this.prodChangeHandler}*/
+                  /*onChange={this.prodChangeHandler}
                 />
               </label>
               <br />
@@ -84,7 +84,7 @@ class ProductList extends Component {
                   type="text" 
                   placeholder="Add dest..." 
                   required
-                  /*onChange={this.prodChangeHandler}*/
+                  /*onChange={this.prodChangeHandler}
                 />
               </label>
               <input type="submit" hidden={true} />
@@ -100,6 +100,47 @@ class ProductList extends Component {
                 )
               })}
             </ul>
+          </div>
+        </div>
+      </div>
+    );
+  }*/
+  render() {
+    return (
+      <div className="row">
+        <div className="col-lg-12 d-flex justify-content-center mt-3">
+          <div id="content">
+            <form
+              onSubmit={(event) => {
+                event.preventDefault()
+                this.props.createProduct()
+              }}>
+              <label>
+                Enter Product Info: 
+                <input 
+                  name="productInfo"  
+                  type="text" 
+                  className="form-control"  
+                  placeholder="Add info..." 
+                  required 
+                  onChange={this.prodChangeHandler}
+                />
+              </label>
+              <input type="submit" hidden={true} />
+            </form>
+            <ul className="list-unstyled" id="productList">
+              { this.state.products.map((product, key) => {
+                return(
+                  <div className="productTemplate" key={key}>
+                    <label>
+                      <input type="text" />
+                      <span className="content">{product.productInfo}</span> 
+                    </label>
+                  </div>
+                )
+              })}
+            </ul>
+            <ul></ul>
           </div>
         </div>
       </div>
