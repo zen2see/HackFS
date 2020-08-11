@@ -4,12 +4,13 @@ import logo from './logo.svg';
 import './App.css';
 import { SCHAIN_ABI, SCHAIN_ADD } from './abis'
 import ProductList from './ProductList'
+import DynamicTable from './DynamicTable'
 
 // const web3 = new Web3(web3.givenProvider);
 // const SChainContract = new web3.eth.Contract(sChainAbi, sChainAddr);
 
 class App extends Component {
-  componentWillMount() {
+  componentWillMount() { 
     document.body.style.backgroundColor = "#282c34"
     document.body.style.color = "grey"
     this.loadBlockchainData()
@@ -29,7 +30,7 @@ class App extends Component {
         products: [...this.state.products, product]
       })
     }
-    console.log('products', this.state.products)
+    console.log('lbd_products', this.state.products)
     this.setState({ loading: false})
   }
   
@@ -44,7 +45,7 @@ class App extends Component {
     // this.prodChangeHandler = this.prodChangeHandler.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
 
-    // this.createProduct = this.createProduct.bind(this)
+    this.addProduct = this.addProduct.bind(this)
   }
 
   /*prodChangeHandler(event) {
@@ -61,23 +62,25 @@ class App extends Component {
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
   }
-
-
+ 
+  */
   
-  createProduct() {
+  addProduct(product) {
     this.setState({ loading: true })
-    this.state.schainDapp.methods.addProduct(
-      this.state.productName, 
-      this.state.productInfo, 
-      this.state.productValue,
-      this.state.productGpgga,
-      this.state.productDest
-    ).send({ from: this.state.account })
+    this.state.schainDapp.methods.addProduct(product)
+    .send({ from: this.state.account, gasPrice: "90000000000", value: "0000000000000000000", })
     .once('receipt', (receipt) => {
       this.setState({ loading: false })
     })
   }
-  */
+  
+ renderTableHeader() {
+   let header = Object.keys(this.state.products)
+   console.log(this.state.products)
+   return header.map((key, index) => {
+     return <th key={index}>{key.toUpperCase()}</th>
+   })
+ } 
   
   render() {
     return (
@@ -85,11 +88,10 @@ class App extends Component {
         {/* Nav bar */}
         <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
          <a className="navbar-brand col-sm-3 col-md-2 mr-0" 
-            href="https://ethglobal.co/" target="_blank">HackFS - Supply Chain
+            href="https://ethglobal.co/" target="_self">HackFS - Supply Chain
          </a>
          <span className="navbar-text navbar-right px-2">Your account: {this.state.account}</span> 
         </nav>
-
         {/* Main content */}
         <div className="container-fluid">
           <div className="row mt-5">
@@ -102,52 +104,11 @@ class App extends Component {
               {/*<div className="row">Current products: { this.state.productIdCount }</div>*/}
             </main>           
           </div>
-          <div className="row">
-        <div className="col-lg-12 d-flex justify-content-center mt-3">
-          <div id="content">
-            <form
-              onSubmit={(event) => {
-                event.preventDefault()
-                this.props.createProduct()
-              }}>
-              <label>
-                Enter Product Info: 
-                <input 
-                  name="productInfo"  
-                  type="text" 
-                  className="form-control"  
-                  placeholder="Add info..." 
-                  required 
-                  onChange={this.prodChangeHandler}
-                />
-              </label>
-              <input type="submit" hidden={true} />
-            </form>
-            <ul className="list-unstyled" id="productList">
-              { this.state.products.map((product, key) => {
-                return(
-                  <div className="productTemplate" key={key}>
-                    <label>
-                      <span className="content">{product.productId}</span>
-                      <span className="content">{product.productInfo}</span> 
-                      <span className="content">{product.productProducer}</span>
-                    </label>
-                  </div>
-                )
-              })}
-            </ul>
-            <ul></ul>
-          </div>
         </div>
-      </div>
-
-          {/* Main actions 
-          { this.state.loading ? <div id="loader"> <p>Loading...</p> </div>
-            : <ProductList products={this.state.products}  />
-          }  
-          */}
-
-        </div>
+        {/* Main actions */} 
+        { this.state.loading ? <div id="loader"> <p>Loading...</p> </div>
+            : <ProductList products={this.state.products} addProduct={this.addProduct} />        
+        }  
       </div>
     );
   }

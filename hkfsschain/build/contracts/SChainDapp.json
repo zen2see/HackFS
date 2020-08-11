@@ -99,7 +99,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -118,7 +119,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -137,7 +139,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -150,7 +153,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -163,7 +167,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -192,7 +197,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -212,7 +218,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -229,7 +236,8 @@
     },
     {
       "stateMutability": "payable",
-      "type": "receive"
+      "type": "receive",
+      "payable": true
     },
     {
       "inputs": [],
@@ -278,7 +286,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -5643,15 +5652,41 @@
           ],
           "name": "OwnershipTransferred",
           "type": "event"
+        },
+        "0x5b4b75507fec3fac82d0c15319907fd11ad7f546f0421174c4fb1213130855fd": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "prodId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "prodInfo",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "prodProducer",
+              "type": "address"
+            }
+          ],
+          "name": "LogAddProduct",
+          "type": "event"
         }
       },
       "links": {},
-      "address": "0x519eCf6128ab9458ce63b36e15d61ba9e166918f",
-      "transactionHash": "0xc34fe9b0b04a4c4f84ef58b2b90b76b34f7b36830727c21eb8f93d831519fc65"
+      "address": "0x1BA1774cbCed7cEf81069d8276211dC6eb7B6def",
+      "transactionHash": "0xe6ce1c5f6484f456e00e634fea8bd7a6405d01a399c77e6ce5f890bf180b2143"
     }
   },
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-08-07T23:06:03.512Z",
+  "updatedAt": "2020-08-11T01:44:32.637Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {
       "addProduct(string)": {
