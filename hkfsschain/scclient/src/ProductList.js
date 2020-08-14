@@ -2,9 +2,18 @@ import React, { Component } from 'react';
 import './App.css';
 
 class ProductList extends Component {
-  /*
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      prodName: '',
+      prodInfo: ''
+    }
+
+    this.productInputChange = this.productInputChange.bind(this)
+  }
+  
   productInputChange(event) {
-    event.preventDefault();
     const target = event.target;
     const name = target.name;
     let value = event.target.value;
@@ -16,7 +25,7 @@ class ProductList extends Component {
     console.log("1st func " + theState); 
   }
   
-  
+  /*
   submit() {
     console.log("in submit " + this.state.prodName, this.state.prodInfo)
     this.state.schainDapp.methods.addProduct(this.state.prodName, this.state.prodInfo)
@@ -177,20 +186,21 @@ class ProductList extends Component {
             <form        
               onSubmit={(event) => {
                 event.preventDefault()
-                this.props.addProduct(this.product.value, this.product.value)
+                //this.props.addProduct(this.product.value, this.product.value)
+                this.props.addProduct(this.state.prodName, this.state.prodInfo)
               }}
             >
               <label>
                 Enter Product Name:
                 <input
                   id="prodNameId"
-                  ref={(input) => {this.product = input}}
+                  //ref={(input) => {this.product.name = input}}
                   name="prodName"
                   className="form-control"  
                   type="text" 
                   placeholder="Add name..." 
                   required 
-                  // onChange={this.productInputChange}
+                  onChange={this.productInputChange}
                 />
               </label>
               <br />
@@ -198,13 +208,13 @@ class ProductList extends Component {
                 Enter Product Info: 
                 <input
                   id="prodInfoId"
-                  ref={(input) => {this.product = input}}
+                  // ref={(input) => {this.product.name = input}}
                   name="prodInfo"  
                   type="text" 
                   className="form-control"  
                   placeholder="Add info..." 
                   required 
-                  // onChange={this.productInputChange}
+                  onChange={this.productInputChange}
                 />
               </label>
               <br />
