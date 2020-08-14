@@ -34,13 +34,17 @@
 
 td:hover {
   color: white;
-  
+}
+
+td {
+  padding-right: 2rem;
 }
 
 #hoverStyleRow {
   color: white;
   background-color: grey;
 }
+
 
 #horizontalVerticalWrapper {
   max-width: 300px;

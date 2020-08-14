@@ -58,7 +58,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 382,
+                      "referencedDeclaration": 397,
                       "src": "644:3:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -154,7 +154,7 @@
                     "name": "this",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 396,
+                    "referencedDeclaration": 411,
                     "src": "742:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_Context_$22",
@@ -174,7 +174,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 382,
+                      "referencedDeclaration": 397,
                       "src": "913:3:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -313,7 +313,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 382,
+                      "referencedDeclaration": 397,
                       "src": "644:3:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -409,7 +409,7 @@
                     "name": "this",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 396,
+                    "referencedDeclaration": 411,
                     "src": "742:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_Context_$22",
@@ -429,7 +429,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 382,
+                      "referencedDeclaration": 397,
                       "src": "913:3:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -524,7 +524,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.3",
-  "updatedAt": "2020-08-11T01:44:31.109Z",
+  "updatedAt": "2020-08-14T09:03:10.908Z",
   "devdoc": {
     "methods": {}
   },

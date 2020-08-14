@@ -21,10 +21,12 @@ contract SChainDapp is Ownable {
 
     /// @notice A Product:
     /// @param Product Id: @productId
+    /// @param Product Name: @productName
     /// @param Product Info: @productInfo
     /// @param Product Producer: @productProducer
     struct Product {
         uint productId;
+        string productName;
         string productInfo;
         address payable productProducer;
     }
@@ -38,10 +40,12 @@ contract SChainDapp is Ownable {
 
     /// @notice LogAddProduct should provide info about the product
     /// @param prodId the product id
+    /// @param prodName the product name
     /// @param prodInfo the product info
     /// @param prodProducer the product producer
     event LogAddProduct(
         uint prodId,
+        string prodName,
         string prodInfo,
         address prodProducer
     );
@@ -64,7 +68,7 @@ contract SChainDapp is Ownable {
     {
         scAdmin = owner();      
         addAdmin(scAdmin);
-        addProduct("Example product");
+        addProduct("Products Name", "Example product");
     }
 
     /// @notice Payable fallback
@@ -91,6 +95,7 @@ contract SChainDapp is Ownable {
     /// @dev The productId is derived from the counter
     /// @param prodInfo Any product info
     function addProduct(
+        string memory prodName,
         string memory prodInfo
     )
         public
@@ -101,15 +106,17 @@ contract SChainDapp is Ownable {
         /// @notice update via productId
         products[productIdCounter] = Product(
             productIdCounter,
+            prodName,
             prodInfo,
             _msgSender()
         );
 
-        emit LogAddProduct(productIdCounter, prodInfo, _msgSender()); 
+        emit LogAddProduct(productIdCounter, prodName, prodInfo, _msgSender()); 
     }
 
     /// @notice Returns Product
-    /// @return product's Id
+    /// @return product's id
+    /// @return product's name
     /// @return product's info
     /// @return product's producer
     function getProductById(uint _prodId)
@@ -117,6 +124,7 @@ contract SChainDapp is Ownable {
         view
         returns (
             uint,
+            string memory,
             string memory,
             address 
         )
@@ -128,6 +136,7 @@ contract SChainDapp is Ownable {
 
           return (
               products[_prodId].productId,
+              products[_prodId].productName,
               products[_prodId].productInfo,
               products[_prodId].productProducer
         );

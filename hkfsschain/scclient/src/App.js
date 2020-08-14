@@ -6,9 +6,6 @@ import { SCHAIN_ABI, SCHAIN_ADD } from './abis'
 import ProductList from './ProductList'
 import DynamicTable from './DynamicTable'
 
-// const web3 = new Web3(web3.givenProvider);
-// const SChainContract = new web3.eth.Contract(sChainAbi, sChainAddr);
-
 class App extends Component {
   componentWillMount() { 
     document.body.style.backgroundColor = "#282c34"
@@ -40,48 +37,21 @@ class App extends Component {
       account: '',
       prodIdCount: 0,
       loading: true,
-      products: []    
+      products: [],    
     }
-    // this.prodChangeHandler = this.prodChangeHandler.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-
+       
     this.addProduct = this.addProduct.bind(this)
   }
-
-  /*prodChangeHandler(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    console.log(name, value);
-    this.setState({
-      [name]: value
-    });
-  }
-
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
- 
-  */
   
-  addProduct(product) {
+  addProduct(name, info) {
     this.setState({ loading: true })
-    this.state.schainDapp.methods.addProduct(product)
+    this.state.schainDapp.methods.addProduct(name, info)
     .send({ from: this.state.account, gasPrice: "90000000000", value: "0000000000000000000", })
     .once('receipt', (receipt) => {
       this.setState({ loading: false })
     })
   }
-  
- renderTableHeader() {
-   let header = Object.keys(this.state.products)
-   console.log(this.state.products)
-   return header.map((key, index) => {
-     return <th key={index}>{key.toUpperCase()}</th>
-   })
- } 
-  
+
   render() {
     return (
       <div>
