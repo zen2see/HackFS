@@ -24,11 +24,17 @@ contract SChainDapp is Ownable {
     /// @param Product Name: @productName
     /// @param Product Info: @productInfo
     /// @param Product Producer: @productProducer
+    /// @param Product Name: @productValue
+    /// @param Product GPA: @productGpgga
+    /// @param Product Destination: @productDest
     struct Product {
         uint productId;
         string productName;
         string productInfo;
         address payable productProducer;
+        uint256 productValue;
+        string productGpgga;
+        string productDest;
     }
  
     mapping (uint => Product) public products;
@@ -68,7 +74,13 @@ contract SChainDapp is Ownable {
     {
         scAdmin = owner();      
         addAdmin(scAdmin);
-        addProduct("Products Name", "Example product");
+        addProduct(
+            "Example Name",
+            "Example Info",
+            1,
+            "000N0W00",
+            "NY"
+        );
     }
 
     /// @notice Payable fallback
@@ -96,7 +108,10 @@ contract SChainDapp is Ownable {
     /// @param prodInfo Any product info
     function addProduct(
         string memory prodName,
-        string memory prodInfo
+        string memory prodInfo,
+        uint256 prodValue,
+        string memory prodGpgga,
+        string memory prodDest
     )
         public
         onlyAdmin(_msgSender())
@@ -108,7 +123,10 @@ contract SChainDapp is Ownable {
             productIdCounter,
             prodName,
             prodInfo,
-            _msgSender()
+            _msgSender(),
+            prodValue,
+            prodGpgga,
+            prodDest
         );
 
         emit LogAddProduct(productIdCounter, prodName, prodInfo, _msgSender()); 
@@ -119,6 +137,9 @@ contract SChainDapp is Ownable {
     /// @return product's name
     /// @return product's info
     /// @return product's producer
+    /// @return product's value
+    /// @return product's gpgga
+    /// @return product's dest
     function getProductById(uint _prodId)
         public
         view
@@ -126,7 +147,10 @@ contract SChainDapp is Ownable {
             uint,
             string memory,
             string memory,
-            address 
+            address,
+            uint256,
+            string memory,
+            string memory
         )
     {
           require(
@@ -138,7 +162,10 @@ contract SChainDapp is Ownable {
               products[_prodId].productId,
               products[_prodId].productName,
               products[_prodId].productInfo,
-              products[_prodId].productProducer
+              products[_prodId].productProducer,
+              products[_prodId].productValue,
+              products[_prodId].productGpgga,
+              products[_prodId].productDest
         );
     }
 

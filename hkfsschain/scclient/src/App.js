@@ -43,9 +43,9 @@ class App extends Component {
     this.addProduct = this.addProduct.bind(this)
   }
   
-  addProduct(name, info) {
+  addProduct(name, info, val, gpa, dest) {
     this.setState({ loading: true })
-    this.state.schainDapp.methods.addProduct(name, info)
+    this.state.schainDapp.methods.addProduct(name, info, val, gpa, dest)
     .send({ from: this.state.account, gasPrice: "90000000000", value: "0000000000000000000", })
     .once('receipt', (receipt) => {
       this.setState({ loading: false })
