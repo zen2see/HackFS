@@ -34,7 +34,7 @@ class ProductList extends Component {
     console.log("1st func " + theState)
   }
 
-  renderProductTable() {
+  renderProductForm() {
     return this.props.products.map((product, index) => {
       const { 
         productId, 
@@ -123,7 +123,7 @@ class ProductList extends Component {
               </label>
               <br />
               <label>
-                Enter Product Gppa:
+                Enter Product GPGGA:
                 <input 
                   name="prodGpgga"
                   className="form-control"  
@@ -158,6 +158,8 @@ class ProductList extends Component {
       </div>
       <div>
         {/*{this.renderTableHeader()*/}
+        <br />
+        <h5 className="productTableHeader">CURRENT PRODUCTS</h5>
       </div>
       <div className="row pl-3">
         <div className="col-lg-12 d-flex">
@@ -174,7 +176,7 @@ class ProductList extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.renderProductTable()}
+              {this.renderProductForm()}
             </tbody>
           </table>
         </div>

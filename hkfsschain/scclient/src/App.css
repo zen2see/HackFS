@@ -40,6 +40,15 @@ td {
   padding-right: 2rem;
 }
 
+th {
+  padding-right: 2rem;
+}
+
+.productTableHeader {
+  text-align: center;
+  margin-bottom: 0;
+}
+
 #hoverStyleRow {
   color: white;
   background-color: grey;

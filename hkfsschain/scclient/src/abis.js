@@ -1,4 +1,4 @@
-export const SCHAIN_ADD = '0x6c1538c7c6CEe5ab7028c4942a4BC97CB2B99886'
+export const SCHAIN_ADD = '0x6A3A3744161aB7F175bE3f09C6391b85D66666De'
 export const SCHAIN_ABI = [
   {
     "inputs": [],
