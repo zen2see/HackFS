@@ -11,6 +11,10 @@ class ProductList extends Component {
       prodVal: '',
       prodGpgga: '',
       prodDest: '',
+      prodProd: '',
+      prodDist: '',
+      prodRet: '',
+      prodCon: '',
     }
     this.productInputChange = this.productInputChange.bind(this)
   }
@@ -29,31 +33,41 @@ class ProductList extends Component {
       this.state.prodInfo, 
       this.state.prodVal, 
       this.state.prodGpgga,
-      this.state.prodDest
+      this.state.prodDest,
+      this.state.prodProd,
+      this.state.prodDist,
+      this.state.prodRet,
+      this.state.ProdCon
     ];
     console.log("1st func " + theState)
   }
 
-  renderProductForm() {
+  renderProductTable() {
     return this.props.products.map((product, index) => {
       const { 
         productId, 
         productName, 
         productInfo, 
-        productProducer,
         productValue,
         productGpgga,
-        productDest
+        productDest,
+        productProducer,
+        productDistributor,
+        productRetailer,
+        productConsumer
       } = product
       return (
         <tr className="hoverStyleRow" key={productId}>
           <td>{productId}</td>
           <td>{productName}</td>
           <td>{productInfo}</td>
-          <td>{productProducer}</td>
           <td>{productValue}</td>
           <td>{productGpgga}</td>
           <td>{productDest}</td>
+          <td>{productProducer}</td>
+          <td>{productDistributor}</td>
+          <td>{productRetailer}</td>
+          <td>{productConsumer}</td>
         </tr>
       )
      })
@@ -66,6 +80,8 @@ class ProductList extends Component {
       return <th key={index}>{key.toUpperCase()}</th>
     })
   }
+
+  .slice(0,6) + "...." + this.state.prodProd.slice(-4)
   */
 
   render() {
@@ -161,25 +177,30 @@ class ProductList extends Component {
         <br />
         <h5 className="productTableHeader">CURRENT PRODUCTS</h5>
       </div>
-      <div className="row pl-3">
-        <div className="col-lg-12 d-flex">
-          <table className=''id='products'>
-            <thead>
+      <div className="row pl-3 justify-content-center">
+        {/*<div className="col-2"></div>*/}
+        <div className="table-responsive ">
+          <table className="table-sm" id="products">
+            <thead className="" style={{ whiteSpace: "nowrap"}}>
               <tr>
                 <th scope='col'>Id#</th>
                 <th scope='col'>Product Name</th>
                 <th scope='col'>Product Info</th>
-                <th scope='col'>Product address</th>
                 <th scope='col'>Product Value</th>
                 <th scope='col'>Product Gpgga</th>
                 <th scope='col'>Product Dest</th>
+                <th scope='col'>Producer Address</th>
+                <th scope='col'>Distributor Address</th>
+                <th scope='col'>Retailer Address</th>
+                <th scope='col'>Consumer Address</th>
               </tr>
             </thead>
             <tbody>
-              {this.renderProductForm()}
+              {this.renderProductTable()}
             </tbody>
           </table>
         </div>
+        {/*<div className="col-2"></div>*/}
       </div>
     </div>    
     );

@@ -15,8 +15,14 @@ class App extends Component {
 
   async loadBlockchainData() {
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-    const accounts = await web3.eth.getAccounts()
-    this.setState({ account: accounts[0] })
+    try {
+      const accounts = await web3.eth.getAccounts()
+      // const accountsm = (accounts[0].slice(0,6) + "...." + accounts[0].slice(-4))
+      const accountsm = accounts[0]
+      this.setState({ account: accountsm })
+    } catch(error) {
+      console.log('error with accounts')
+    } 
     const schainDapp = new web3.eth.Contract(SCHAIN_ABI, SCHAIN_ADD)
     this.setState({ schainDapp })
     const productIdCount = await schainDapp.methods.productIdCounter().call()
@@ -54,19 +60,19 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
+        {/* Main content */}
         {/* Nav bar */}
-        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-         <a className="navbar-brand col-sm-3 col-md-2 mr-0" 
+        <nav className="navbar navbar-dark fixed-top bg-dark flex-sm-nowrap p-0 shadow">
+         <a className="navbar-brand col-sm-4 mr-0" 
             href="https://ethglobal.co/" target="_self">HackFS - Supply Chain
          </a>
-         <span className="navbar-text navbar-right px-2">Your account: {this.state.account}</span> 
+         <span className="navbar-text navbar-right px-2">Your account: {
+           this.state.account.slice(0,6) + "...." + this.state.account.slice(-4)}</span> 
         </nav>
-        {/* Main content */}
-        <div className="container-fluid">
           <div className="row mt-5">
             <main role="main" className="col-lg-12 d-flex justify-content-center">
-              <div className="row">
+              <div className="row mt-4">
                 <div className="col-lg-12 d-flex justify-content-center">
                   <h2>Track your products on the Blockchain</h2>
                 </div>
@@ -74,9 +80,12 @@ class App extends Component {
               {/*<div className="row">Current products: { this.state.productIdCount }</div>*/}
             </main>           
           </div>
-        </div>
+       
         {/* Main actions */} 
-        { this.state.loading ? <div id="loader"> <p>Loading...</p> </div>
+        { this.state.loading ? 
+            <div id="loader"> 
+              <p className="mb-0">Loading...</p> 
+              <p className="blink blink-fade">Checking for account...</p></div>
             : <ProductList products={this.state.products} addProduct={this.addProduct} />        
         }  
       </div>

@@ -1,4 +1,4 @@
-export const SCHAIN_ADD = '0x6A3A3744161aB7F175bE3f09C6391b85D66666De'
+export const SCHAIN_ADD = '0x4B964A70b012400d241db9105F3E6B614D7284e5'
 export const SCHAIN_ABI = [
   {
     "inputs": [],
@@ -47,8 +47,44 @@ export const SCHAIN_ABI = [
       },
       {
         "indexed": false,
+        "internalType": "uint256",
+        "name": "prodValue",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "prodGpgga",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "prodDest",
+        "type": "string"
+      },
+      {
+        "indexed": false,
         "internalType": "address",
         "name": "prodProducer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "prodDistributor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "prodRetailer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "prodConsumer",
         "type": "address"
       }
     ],
@@ -201,11 +237,6 @@ export const SCHAIN_ABI = [
         "type": "string"
       },
       {
-        "internalType": "address payable",
-        "name": "productProducer",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
         "name": "productValue",
         "type": "uint256"
@@ -219,6 +250,26 @@ export const SCHAIN_ABI = [
         "internalType": "string",
         "name": "productDest",
         "type": "string"
+      },
+      {
+        "internalType": "address payable",
+        "name": "productProducer",
+        "type": "address"
+      },
+      {
+        "internalType": "address payable",
+        "name": "productDistributor",
+        "type": "address"
+      },
+      {
+        "internalType": "address payable",
+        "name": "productRetailer",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "productConsumer",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -328,11 +379,6 @@ export const SCHAIN_ABI = [
         "internalType": "string",
         "name": "",
         "type": "string"
-      },
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
       },
       {
         "internalType": "uint256",
